@@ -1,321 +1,770 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-  <title>林亦辰 | GitHub 主页</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Noto+Sans+SC:wght@700;400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #00e1be;
-      --bg-gradient: linear-gradient(120deg, #181d2f 0%, #232946 100%);
-      --card-bg: rgba(28,33,49,0.95);
-      --border-radius: 18px;
-      --shadow: 0 6px 32px rgba(0,225,190,0.09), 0 1.5px 8px rgba(0,0,0,0.09);
-      --font-main: 'Noto Sans SC', 'Montserrat', Arial, sans-serif;
-      --font-eng: 'Montserrat', Arial, sans-serif;
-      --text-main: #e6e8ec;
-      --text-soft: #a5b0c3;
-      --text-title: #00e1be;
-      --badge-bg: #232946;
-      --badge-text: #00e1be;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg-gradient);
-      color: var(--text-main);
-      font-family: var(--font-main);
-      font-size: 17px;
-      letter-spacing: 0.03em;
-      min-height: 100vh;
-    }
-    。container {
-      max-width: 900px;
-      margin: 56px auto 40px auto;
-      background: var(--card-bg);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      padding: 46px 44px 36px 44px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(3px);
-    }
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-    }
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid var(--primary);
-      box-shadow: 0 2px 20px var(--primary);
-      object-fit: cover;
-      background: #222;
-      transition: transform 0.15s;
-    }
-    .avatar:hover {
-      transform: scale(1.05) rotate(-3deg);
-    }
-    .profile-info h1 {
-      font-family: var(--font-main);
-      font-size: 2.3em;
-      margin: 0 0 4px 0;
-      color: var(--text-title);
-      letter-spacing: 1px;
-      font-weight: 700;
-    }
-    .profile-info h2 {
-      font-size: 1.15em;
-      font-weight: 400;
-      color: var(--text-main);
-      opacity: 0.82;
-      margin: 0 0 10px 0;
-      letter-spacing: 0.5px;
-    }
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 5px;
-    }
-    .badge {
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      font-size: 1em;
-      font-family: var(--font-main);
-      padding: 4px 16px 5px 16px;
-      border-radius: 14px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      border: 1.5px solid var(--primary);
-      transition: background 0.13s;
-    }
-    .badge:hover {
-      background: var(--primary);
-      color: #232946;
-    }
-    section {
-      margin-top: 38px;
-      margin-bottom: 0;
-    }
-    section h3 {
-      color: var(--text-title);
-      font-size: 1.18em;
-      margin-bottom: 13px;
-      letter-spacing: 0.8px;
-      font-weight: 700;
-      border-left: 4px solid var(--primary);
-      padding-left: 11px;
-      margin-top: 0;
-    }
-    .desc {
-      color: var(--text-main);
-      opacity: 0.96;
-      line-height: 1.85;
-      margin: 0 0 4px 0;
-      font-size: 1.06em;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-    .project-card {
-      background: rgba(36,42,65,0.99);
-      border-radius: 13px;
-      padding: 20px 18px 18px 18px;
-      border-left: 4px solid var(--primary);
-      box-shadow: 0 2px 12px rgba(0,225,190,0.07);
-      transition: transform 0.13s, box-shadow 0.13s;
-      position: relative;
-    }
-    .project-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 12px 32px rgba(0,225,190,0.18);
-      border-left: 5px solid #39f8d6;
-    }
-    .project-title {
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 1.1em;
-      margin-bottom: 7px;
-      font-family: var(--font-eng);
-      letter-spacing: 0.5px;
-    }
-    .project-desc {
-      font-size: 1em;
-      color: #e6faf6;
-      opacity: 0.84;
-      margin-bottom: 7px;
-      font-family: var(--font-main);
-    }
-    .project-meta {
-      font-size: 0.92em;
-      color: #96f8e6;
-      margin-top: 2px;
-      font-family: var(--font-eng);
-    }
-    .links {
-      margin-top: 26px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .links a {
-      display: inline-block;
-      color: var(--primary);
-      background: #232946;
-      padding: 8px 22px 8px 20px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      font-family: var(--font-eng);
-      font-size: 1.03em;
-      border: 1.5px solid var(--primary);
-      transition: background 0.12s, color 0.13s;
-      margin-bottom: 5px;
-    }
-    .links a:hover {
-      background: var(--primary);
-      color: #181d2f;
-      box-shadow: 0 3px 18px rgba(0,225,190,0.16);
-    }
-    .pubs {
-      margin: 0 0 0 2px;
-      padding-left: 0;
-      list-style: none;
-    }
-    .pubs li {
-      margin-bottom: 10px;
-      color: #c7f3e8;
-      line-height: 1.5;
-      font-size: 1em;
-      position: relative;
-      padding-left: 18px;
-    }
-    .pubs li:before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-size: 1.22em;
-      top: 0.1em;
-    }
-    /* 波浪装饰 */
-    .wave {
-      position: absolute;
-      left: -80px; right: -80px; top: -50px;
-      height: 150px;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.23;
-    }
-    @media (max-width: 800px) {
-      .container {
-        padding: 18px 6vw 19px 6vw;
-      }
-      .projects {
-        grid-template-columns: 1fr;
-        gap: 17px;
-      }
-      .profile-header {
-        flex-direction: column;
-        gap: 13px;
-        align-items: flex-start;
-      }
-      .avatar {
-        width: 85px; height: 85px;
-      }
-    }
-    @media (max-width: 500px) {
-      .container {
-        padding: 10px 2vw;
-      }
-      .profile-header {
-        gap: 8px;
-      }
-      section {
-        margin-top: 27px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac Studio AI Stack - Thunderbolt 5 Cluster</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; color: #fff; overflow: hidden; }
+        #canvas-container { width: 100vw; height: 100vh; }
+        
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; padding: 20px 32px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .apple-logo { font-size: 24px; opacity: 0.9; }
+        .logo-text { font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em; }
+        .logo-text span { color: #86868b; font-weight: 400; }
+        
+        .metrics { display: flex; gap: 32px; }
+        .metric { text-align: center; }
+        .metric-value { font-size: 1.2rem; font-weight: 600; color: #fff; }
+        .metric-label { font-size: 0.6rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+        
+        .info-panel { position: fixed; left: 32px; top: 50%; transform: translateY(-50%); z-index: 100; width: 200px; }
+        .panel-title { font-size: 0.65rem; color: rgba(255,255,255,0.4); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 16px; }
+        .spec-item { margin-bottom: 12px; }
+        .spec-label { display: flex; justify-content: space-between; font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+        .spec-bar { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; overflow: hidden; }
+        .spec-fill { height: 100%; background: linear-gradient(90deg, #2997ff, #5bf); border-radius: 1px; transition: width 0.3s ease; }
+        .matrix-info { margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .matrix-title { font-size: 0.8rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .matrix-detail { font-size: 0.65rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+        
+        .tb5-badge {
+            margin-top: 16px; padding: 10px; background: rgba(255,59,48,0.1); border: 1px solid rgba(255,59,48,0.3);
+            border-radius: 8px; text-align: center;
+        }
+        .tb5-badge-title { font-size: 0.6rem; color: #ff3b30; font-weight: 600; letter-spacing: 0.5px; }
+        .tb5-badge-speed { font-size: 0.9rem; color: #ff6b61; font-weight: 700; margin-top: 4px; }
+        
+        .control-panel { position: fixed; right: 32px; top: 50%; transform: translateY(-50%); z-index: 100; width: 140px; }
+        .control-group { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 12px; }
+        .control-group-title { font-size: 0.55rem; color: rgba(255,255,255,0.35); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
+        .control-btn { width: 100%; padding: 8px 10px; background: transparent; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; color: rgba(255,255,255,0.5); font-size: 0.65rem; font-family: inherit; cursor: pointer; transition: all 0.2s ease; text-align: left; margin-bottom: 5px; }
+        .control-btn:last-child { margin-bottom: 0; }
+        .control-btn:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
+        .control-btn.active { background: rgba(41,151,255,0.15); border-color: rgba(41,151,255,0.4); color: #2997ff; }
+        
+        .nav-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 6px; background: rgba(28,28,30,0.9); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 8px 12px; backdrop-filter: blur(20px); }
+        .nav-link { display: flex; align-items: center; padding: 6px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.02em; transition: all 0.2s ease; }
+        .nav-link:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+        
+        .loading { position: fixed; inset: 0; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; transition: opacity 0.8s ease; gap: 20px; }
+        .loading.hidden { opacity: 0; pointer-events: none; }
+        .loading-logo { font-size: 40px; opacity: 0.8; animation: pulse 1.5s ease-in-out infinite; }
+        .loading-text { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.9; } }
+        
+        @media (max-width: 1200px) { .control-panel { display: none; } }
+        @media (max-width: 900px) { .info-panel { display: none; } .metrics { gap: 20px; } }
+        @media (max-width: 700px) { .metrics { display: none; } .nav-bar { flex-wrap: wrap; max-width: 90%; } }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,40 C150,120 350,0 600,40 C850,80 1050,20 1200,40 L1200,0 L0,0 Z" fill="#00e1be"></path></svg>
-    <div class="profile-header">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="林亦辰头像" class="avatar">
-      <div class="profile-info">
-        <h1>林亦辰</h1>
-        <h2>人工智能首席架构师｜开源推动者｜计算机科学博士</h2>
-        <div class="badges">
-          <span class="badge">深度学习</span>
-          <span class="badge">云原生架构</span>
-          <span class="badge">大数据</span>
-          <span class="badge">分布式系统</span>
-          <span class="badge">Web3</span>
-        </div>
-      </div>
+    <div class="loading" id="loading">
+        <div class="loading-logo"></div>
+        <div class="loading-text">Building Thunderbolt 5 Stack...</div>
     </div>
-      
-    <section>
-      <h3>关于我</h3>
-      <p class="desc">
-        你好，我是 <strong>林亦辰</strong>，现任 <b>未来智能实验室</b> 首席AI架构师、知名开源项目 <em>NeuroFlow</em> 的发起人和核心维护者。我的研究方向涵盖 <b>深度学习算法</b>、<b>大规模分布式系统</b> 及 <b>智能云平台</b>。<br>
-        <br>
-        作为 30+ 顶级论文作者（NeurIPS, AAAI, WWW），我曾主导全球数家企业级AI落地项目，并多次受邀于各大技术峰会发表主题演讲。积极推动开源与AI生态建设，热爱创新与分享。
-      </p>
-    </section>
-
-    <section>
-      <h3>精选开源项目</h3>
-      <div class="projects">
-        <div class="project-card">
-          <div class="project-title">NeuroFlow</div>
-          <div class="project-desc">下一代高性能深度学习框架，支持异构分布式训练与多模态AI应用。被全球多家研究机构与科技企业广泛采用。</div>
-          <div class="project-meta">⭐ 18,900 | Python / CUDA / C++</div>
+    
+    <header class="header">
+        <div class="logo">
+            <div class="apple-logo"></div>
+            <div class="logo-text">Mac Studio <span>AI Stack</span></div>
         </div>
-        <div class="project-card">
-          <div class="project-title">CloudWeaver</div>
-          <div class="project-desc">面向AI的云原生微服务平台，支持弹性伸缩、自动化部署与边缘智能，助力企业智能化转型。</div>
-          <div class="project-meta">⭐ 11,400 | Go / Rust / Kubernetes</div>
+        <div class="metrics">
+            <div class="metric"><div class="metric-value">6</div><div class="metric-label">Nodes</div></div>
+            <div class="metric"><div class="metric-value">480</div><div class="metric-label">GPU Cores</div></div>
+            <div class="metric"><div class="metric-value">3TB</div><div class="metric-label">Unified Mem</div></div>
+            <div class="metric"><div class="metric-value" id="temp">42<span style="font-size:0.7em">°C</span></div><div class="metric-label">Stack Temp</div></div>
         </div>
-        <div class="project-card">
-          <div class="project-title">Web3AI Toolkit</div>
-          <div class="project-desc">首个Web3与AI融合的开发工具包，实现可信AI计算与智能合约无缝集成，推动去中心化智能未来。</div>
-          <div class="project-meta">⭐ 6,800 | Solidity / TypeScript / Python</div>
+    </header>
+    
+    <div class="info-panel">
+        <div class="panel-title">Cluster Status</div>
+        <div class="spec-item"><div class="spec-label"><span>Compute Load</span><span id="compute-val">85%</span></div><div class="spec-bar"><div class="spec-fill" id="compute-bar" style="width:85%"></div></div></div>
+        <div class="spec-item"><div class="spec-label"><span>Neural Engine</span><span id="neural-val">94%</span></div><div class="spec-bar"><div class="spec-fill" id="neural-bar" style="width:94%"></div></div></div>
+        <div class="spec-item"><div class="spec-label"><span>Memory Pool</span><span id="mem-val">72%</span></div><div class="spec-bar"><div class="spec-fill" id="mem-bar" style="width:72%"></div></div></div>
+        <div class="spec-item"><div class="spec-label"><span>TB5 Bandwidth</span><span id="net-val">120Gb/s</span></div><div class="spec-bar"><div class="spec-fill" id="net-bar" style="width:75%"></div></div></div>
+        <div class="spec-item"><div class="spec-label"><span>Power Total</span><span id="pwr-val">840W</span></div><div class="spec-bar"><div class="spec-fill" id="pwr-bar" style="width:56%"></div></div></div>
+        <div class="tb5-badge">
+            <div class="tb5-badge-title">THUNDERBOLT 5</div>
+            <div class="tb5-badge-speed">80 Gb/s × 5</div>
         </div>
-        <div class="project-card">
-          <div class="project-title">DataVista Pro</div>
-          <div class="project-desc">高性能实时数据可视化库，支持亿级数据的多维可交互分析，服务于金融与智慧城市等行业。</div>
-          <div class="project-meta">⭐ 13,200 | JavaScript / WebAssembly</div>
+        <div class="matrix-info">
+            <div class="matrix-title">Apple Silicon Stack</div>
+            <div class="matrix-detail">6× Mac Studio M3 Ultra<br>480 GPU Cores<br>192 Neural Cores<br>4.9TB/s Bandwidth</div>
         </div>
-      </div>
-    </section>
-      
-    <section>
-      <h3>代表性论文</h3>
-      <ul class="pubs">
-        <li><b>Lin, Y.</b> 等. "NeuroFlow：面向大规模异构计算的深度学习架构." <em>NeurIPS 2023</em></li>
-        <li><b>Lin, Y.</b>, Wang, Z. "云原生AI微服务自动化调度." <em>AAAI 2022</em></li>
-        <li><b>Lin, Y.</b> 等. "Web3驱动的去中心化联邦学习." <em>WWW 2022</em></li>
-        <li><b>Lin, Y.</b> 等. "实时大规模数据可视化的系统设计." <em>VLDB 2021</em></li>
-      </ul>
-    </section>
-      
-    <section>
-      <h3>联系与链接</h3>
-      <div class="links">
-        <a href="mailto:lin.yichen@futureai.org">邮箱</a>
-        <a href="https://linkedin.com/in/linyichen-ai" target="_blank">LinkedIn</a>
-        <a href="https://github.com/pusvsimg" target="_blank">GitHub</a>
-        <a href="https://linyichen.dev" target="_blank">个人网站</a>
-      </div>
-    </section>
-  </div>
+    </div>
+    
+    <div class="control-panel">
+        <div class="control-group">
+            <div class="control-group-title">View</div>
+            <button class="control-btn active" id="btn-rotate">↻ Rotate</button>
+            <button class="control-btn" id="btn-top">▽ Top</button>
+            <button class="control-btn" id="btn-front">▢ Front</button>
+            <button class="control-btn active" id="btn-data">◈ TB5 Links</button>
+            <button class="control-btn" id="btn-reset">⟲ Reset</button>
+        </div>
+    </div>
+    
+    <div class="nav-bar">
+        <a href="https://pornavp.onrender.com/" target="_blank" class="nav-link">AI Navigator</a>
+        <a href="https://chatgpt.com/" target="_blank" class="nav-link">ChatGPT</a>
+        <a href="https://gemini.google.com/" target="_blank" class="nav-link">Gemini</a>
+        <a href="https://www.google.com/" target="_blank" class="nav-link">Google</a>
+        <a href="https://grok.com/" target="_blank" class="nav-link">Grok</a>
+    </div>
+    
+    <div id="canvas-container"></div>
+    
+    <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+    </script>
+    
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+        
+        // Scene
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        
+        const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(3, 2, 5);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
+        container.appendChild(renderer.domElement);
+        
+        // Controls
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.4;
+        controls.target.set(0, 0.8, 0);
+        controls.minDistance = 3;
+        controls.maxDistance = 15;
+        
+        // Lighting
+        const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambient);
+        
+        const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        mainLight.position.set(5, 10, 5);
+        mainLight.castShadow = true;
+        mainLight.shadow.mapSize.width = 2048;
+        mainLight.shadow.mapSize.height = 2048;
+        scene.add(mainLight);
+        
+        const fillLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        fillLight.position.set(-4, 3, -3);
+        scene.add(fillLight);
+        
+        const rimLight = new THREE.PointLight(0xff3b30, 1.0, 15);
+        rimLight.position.set(0, 2, -5);
+        scene.add(rimLight);
+        
+        const topLight = new THREE.PointLight(0xffffff, 0.8, 12);
+        topLight.position.set(0, 4, 0);
+        scene.add(topLight);
+        
+        // Materials
+        const matAluminum = new THREE.MeshStandardMaterial({
+            color: 0xcbcbce,
+            metalness: 0.92,
+            roughness: 0.16,
+            envMapIntensity: 1.0
+        });
+        
+        const matAluminumDark = new THREE.MeshStandardMaterial({
+            color: 0x9a9a9e,
+            metalness: 0.85,
+            roughness: 0.20
+        });
+        
+        const matBlack = new THREE.MeshStandardMaterial({
+            color: 0x0a0a0a,
+            metalness: 0.2,
+            roughness: 0.7
+        });
+        
+        const matPortInner = new THREE.MeshStandardMaterial({
+            color: 0x050505,
+            metalness: 0.3,
+            roughness: 0.9
+        });
+        
+        const matContact = new THREE.MeshStandardMaterial({
+            color: 0xd4af37,
+            metalness: 0.95,
+            roughness: 0.10
+        });
+        
+        const matLedGreen = new THREE.MeshBasicMaterial({ color: 0x30d158 });
+        const matLedWhite = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const matLedRed = new THREE.MeshBasicMaterial({ color: 0xff3b30 });
+        
+        // State
+        const state = { autoRotate: true, showData: true };
+        const macStudios = [];
+        const tb5Cables = [];
+        let flowParticles;
+        let ambientParticles;
+        
+        // Create Rounded Mac Studio with TB5 ports
+        function createMacStudio() {
+            const group = new THREE.Group();
+            
+            // Dimensions: 195mm x 91mm x 195mm (scaled)
+            const w = 0.48, h = 0.22, d = 0.48;
+            const radius = 0.025;
+            const segments = 4;
+            
+            // Main body with rounded corners
+            const bodyGeo = new RoundedBoxGeometry(w, h, d, segments, radius);
+            const body = new THREE.Mesh(bodyGeo, matAluminum);
+            body.castShadow = true;
+            body.receiveShadow = true;
+            group.add(body);
+            
+            // === TOP VENTILATION ===
+            const ventPlateGeo = new RoundedBoxGeometry(w - 0.025, 0.008, d - 0.025, 3, 0.35);
+            const ventPlate = new THREE.Mesh(ventPlateGeo, matAluminumDark);
+            ventPlate.position.y = h/2 - 0.004;
+            group.add(ventPlate);
+            
+            // Vent holes
+            const ventHoleGeo = new THREE.CylinderGeometry(0.006, 0.006, 0.012, 12);
+            const ventPositions = [];
+            
+            for (let ring = 1; ring <= 4; ring++) {
+                const r = ring * 0.045;
+                const count = ring * 8;
+                for (let i = 0; i < count; i++) {
+                    const angle = (i / count) * Math.PI * 2;
+                    const x = Math.cos(angle) * r;
+                    const z = Math.sin(angle) * r;
+                    if (Math.abs(x) < w/2 - 0.035 && Math.abs(z) < d/2 - 0.035) {
+                        ventPositions.push({ x, z });
+                    }
+                }
+            }
+            
+            for (let x = -0.045; x <= 0.045; x += 0.022) {
+                for (let z = -0.045; z <= 0.045; z += 0.022) {
+                    ventPositions.push({ x, z });
+                }
+            }
+            
+            ventPositions.forEach(pos => {
+                const hole = new THREE.Mesh(ventHoleGeo, matBlack);
+                hole.position.set(pos.x, h/2 + 0.002, pos.z);
+                group.add(hole);
+            });
+            
+            // === APPLE LOGO ===
+            const logoGeo = new THREE.CircleGeometry(0.025, 24);
+            const logoMat = new THREE.MeshStandardMaterial({ color: 0x454545, metalness: 0.3, roughness: 0.5 });
+            const logo = new THREE.Mesh(logoGeo, logoMat);
+            logo.rotation.x = -Math.PI / 2;
+            logo.position.set(0, h/2 + 0.005, 0);
+            group.add(logo);
+            
+            const biteGeo = new THREE.CircleGeometry(0.008, 16);
+            const bite = new THREE.Mesh(biteGeo, matAluminum);
+            bite.rotation.x = -Math.PI / 2;
+            bite.position.set(0.012, h/2 + 0.006, -0.006);
+            group.add(bite);
+            
+            const leafGeo = new THREE.CircleGeometry(0.005, 8);
+            const leaf = new THREE.Mesh(leafGeo, logoMat);
+            leaf.rotation.x = -Math.PI / 2;
+            leaf.rotation.z = Math.PI / 6;
+            leaf.position.set(0.004, h/2 + 0.006, -0.028);
+            group.add(leaf);
+            
+            // === BOTTOM INTAKE ===
+            const intakeGeo = new RoundedBoxGeometry(w - 0.04, 0.008, d - 0.04, 3, 0.3);
+            const intake = new THREE.Mesh(intakeGeo, matBlack);
+            intake.position.y = -h/2 - 0.004;
+            group.add(intake);
+            
+            const intakeHoleGeo = new THREE.CylinderGeometry(0.006, 0.006, 0.012, 8);
+            for (let x = -0.16; x <= 0.16; x += 0.025) {
+                for (let z = -0.16; z <= 0.16; z += 0.025) {
+                    const hole = new THREE.Mesh(intakeHoleGeo, matAluminumDark);
+                    hole.position.set(x, -h/2 - 0.006, z);
+                    group.add(hole);
+                }
+            }
+            
+            // === FRONT PORTS ===
+            const frontZ = d/2;
+            
+            // SDXC Slot
+            const sdSlotGeo = new THREE.BoxGeometry(0.08, 0.012, 0.006);
+            const sdSlot = new THREE.Mesh(sdSlotGeo, matBlack);
+            sdSlot.position.set(-0.12, 0.02, frontZ);
+            group.add(sdSlot);
+            
+            const sdInnerGeo = new THREE.BoxGeometry(0.07, 0.008, 0.008);
+            const sdInner = new THREE.Mesh(sdInnerGeo, matPortInner);
+            sdInner.position.set(-0.12, 0.02, frontZ + 0.004);
+            group.add(sdInner);
+            
+            // Thunderbolt 5 ports (2x front) - RED accent
+            const tb5Geo = new THREE.BoxGeometry(0.012, 0.035, 0.006);
+            const tb5InnerGeo = new THREE.BoxGeometry(0.009, 0.025, 0.008);
+            const contactGeo = new THREE.BoxGeometry(0.005, 0.015, 0.001);
+            
+            for (let i = 0; i < 2; i++) {
+                const x = 0.06 + i * 0.04;
+                
+                const tb5 = new THREE.Mesh(tb5Geo, matBlack);
+                tb5.position.set(x, 0.02, frontZ);
+                group.add(tb5);
+                
+                const tb5Inner = new THREE.Mesh(tb5InnerGeo, matPortInner);
+                tb5Inner.position.set(x, 0.02, frontZ + 0.004);
+                group.add(tb5Inner);
+                
+                // Red TB5 accent ring
+                const accentGeo = new THREE.RingGeometry(0.018, 0.022, 16);
+                const accent = new THREE.Mesh(accentGeo, new THREE.MeshBasicMaterial({ color: 0xff3b30, side: THREE.DoubleSide }));
+                accent.position.set(x, 0.02, frontZ + 0.001);
+                group.add(accent);
+                
+                for (let c = 0; c < 2; c++) {
+                    const contact = new THREE.Mesh(contactGeo, matContact);
+                    contact.position.set(x + (c - 0.5) * 0.003, 0.02, frontZ + 0.006);
+                    group.add(contact);
+                }
+            }
+            
+            // Power LED
+            const ledGeo = new THREE.CircleGeometry(0.002, 12);
+            const led = new THREE.Mesh(ledGeo, matLedWhite);
+            led.position.set(0.18, 0.055, frontZ + 0.001);
+            group.add(led);
+            
+            // === REAR PORTS ===
+            const rearZ = -d/2;
+            
+            // Power port
+            const powerGeo = new THREE.CylinderGeometry(0.016, 0.016, 0.008, 24);
+            const power = new THREE.Mesh(powerGeo, matBlack);
+            power.rotation.x = Math.PI / 2;
+            power.position.set(-0.18, 0, rearZ);
+            group.add(power);
+            
+            const powerInnerGeo = new THREE.CylinderGeometry(0.011, 0.011, 0.01, 24);
+            const powerInner = new THREE.Mesh(powerInnerGeo, matPortInner);
+            powerInner.rotation.x = Math.PI / 2;
+            powerInner.position.set(-0.18, 0, rearZ - 0.006);
+            group.add(powerInner);
+            
+            const powerLedGeo = new THREE.CircleGeometry(0.003, 12);
+            const powerLed = new THREE.Mesh(powerLedGeo, matLedGreen);
+            powerLed.position.set(-0.18, -0.045, rearZ - 0.001);
+            group.add(powerLed);
+            
+            // Ethernet
+            const ethGeo = new THREE.BoxGeometry(0.018, 0.014, 0.006);
+            const eth = new THREE.Mesh(ethGeo, matBlack);
+            eth.position.set(-0.12, -0.025, rearZ);
+            group.add(eth);
+            
+            const ethInner = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.01, 0.008), matPortInner);
+            ethInner.position.set(-0.12, -0.025, rearZ - 0.004);
+            group.add(ethInner);
+            
+            // HDMI ports (2x)
+            const hdmiGeo = new THREE.BoxGeometry(0.015, 0.011, 0.006);
+            for (let i = 0; i < 2; i++) {
+                const hdmi = new THREE.Mesh(hdmiGeo, matBlack);
+                hdmi.position.set(-0.06 + i * 0.025, -0.025, rearZ);
+                group.add(hdmi);
+                
+                const hdmiInner = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.007, 0.008), matPortInner);
+                hdmiInner.position.set(-0.06 + i * 0.025, -0.025, rearZ - 0.004);
+                group.add(hdmiInner);
+            }
+            
+            // USB-A ports (4x)
+            const usbaGeo = new THREE.BoxGeometry(0.016, 0.009, 0.006);
+            for (let i = 0; i < 4; i++) {
+                const usba = new THREE.Mesh(usbaGeo, matBlack);
+                usba.position.set(0.03 + i * 0.022, -0.025, rearZ);
+                group.add(usba);
+                
+                const usbaInner = new THREE.Mesh(new THREE.BoxGeometry(0.013, 0.006, 0.008), matPortInner);
+                usbaInner.position.set(0.03 + i * 0.022, -0.025, rearZ - 0.004);
+                group.add(usbaInner);
+            }
+            
+            // Thunderbolt 5 ports (4x rear) with RED accent
+            for (let i = 0; i < 4; i++) {
+                const x = -0.14 + i * 0.03;
+                const tb5 = new THREE.Mesh(tb5Geo, matBlack);
+                tb5.position.set(x, 0.035, rearZ);
+                group.add(tb5);
+                
+                const tb5Inner = new THREE.Mesh(tb5InnerGeo, matPortInner);
+                tb5Inner.position.set(x, 0.035, rearZ - 0.004);
+                group.add(tb5Inner);
+                
+                // Red TB5 accent
+                const accentGeo = new THREE.RingGeometry(0.018, 0.022, 16);
+                const accent = new THREE.Mesh(accentGeo, new THREE.MeshBasicMaterial({ color: 0xff3b30, side: THREE.DoubleSide }));
+                accent.position.set(x, 0.035, rearZ - 0.001);
+                group.add(accent);
+                
+                for (let c = 0; c < 2; c++) {
+                    const contact = new THREE.Mesh(contactGeo, matContact);
+                    contact.position.set(x + (c - 0.5) * 0.003, 0.035, rearZ - 0.006);
+                    group.add(contact);
+                }
+            }
+            
+            // 3.5mm Audio
+            const audioGeo = new THREE.CylinderGeometry(0.008, 0.008, 0.006, 16);
+            const audio = new THREE.Mesh(audioGeo, matBlack);
+            audio.rotation.x = Math.PI / 2;
+            audio.position.set(0.14, 0.035, rearZ);
+            group.add(audio);
+            
+            const audioInner = new THREE.Mesh(new THREE.CylinderGeometry(0.005, 0.005, 0.008, 16), matPortInner);
+            audioInner.rotation.x = Math.PI / 2;
+            audioInner.position.set(0.14, 0.035, rearZ - 0.005);
+            group.add(audioInner);
+            
+            // === RUBBER FEET ===
+            const feetGeo = new THREE.CylinderGeometry(0.01, 0.01, 0.005, 12);
+            const feetMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.9 });
+            const feetPos = [[-0.18, -0.18], [0.18, -0.18], [-0.18, 0.18], [0.18, 0.18]];
+            
+            feetPos.forEach(pos => {
+                const foot = new THREE.Mesh(feetGeo, feetMat);
+                foot.position.set(pos[0], -h/2 - 0.008, pos[1]);
+                group.add(foot);
+            });
+            
+            return group;
+        }
+        
+        // Create Thunderbolt 5 Cable
+        function createTB5Cable(start, end) {
+            const group = new THREE.Group();
+            
+            // Cable geometry - curved path
+            const midPoint = new THREE.Vector3(
+                (start.x + end.x) / 2 + 0.15,
+                (start.y + end.y) / 2,
+                (start.z + end.z) / 2 + 0.05
+            );
+            
+            const curve = new THREE.QuadraticBezierCurve3(start, midPoint, end);
+            const tubeGeo = new THREE.TubeGeometry(curve, 20, 0.004, 8, false);
+            const cableMat = new THREE.MeshStandardMaterial({
+                color: 0xff3b30,
+                metalness: 0.3,
+                roughness: 0.6,
+                emissive: 0xff3b30,
+                emissiveIntensity: 0.1
+            });
+            const cable = new THREE.Mesh(tubeGeo, cableMat);
+            group.add(cable);
+            
+            // Connectors at each end
+            const connectorGeo = new THREE.CylinderGeometry(0.008, 0.008, 0.025, 12);
+            const connectorMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.5, roughness: 0.4 });
+            
+            const connector1 = new THREE.Mesh(connectorGeo, connectorMat);
+            connector1.position.copy(start);
+            group.add(connector1);
+            
+            const connector2 = new THREE.Mesh(connectorGeo, connectorMat);
+            connector2.position.copy(end);
+            group.add(connector2);
+            
+            return group;
+        }
+        
+        // Create Vertical Stack
+        function createStack() {
+            const stackHeight = 6;
+            const spacing = 0.30; // Height between Mac Studios
+            
+            for (let i = 0; i < stackHeight; i++) {
+                const mac = createMacStudio();
+                mac.position.set(0, i * spacing + 0.12, 0);
+                mac.userData.id = i;
+                macStudios.push(mac);
+                scene.add(mac);
+            }
+            
+            // Create TB5 connections between adjacent units
+            for (let i = 0; i < stackHeight - 1; i++) {
+                // Primary TB5 link (rear ports)
+                const start = new THREE.Vector3(-0.05, i * spacing + 0.24 + 0.035, -0.24);
+                const end = new THREE.Vector3(-0.05, (i + 1) * spacing + 0.035, -0.24);
+                const cable = createTB5Cable(start, end);
+                tb5Cables.push(cable);
+                scene.add(cable);
+                
+                // Secondary TB5 link (rear ports, different position)
+                const start2 = new THREE.Vector3(0.05, i * spacing + 0.24 + 0.035, -0.24);
+                const end2 = new THREE.Vector3(0.05, (i + 1) * spacing + 0.035, -0.24);
+                const cable2 = createTB5Cable(start2, end2);
+                tb5Cables.push(cable2);
+                scene.add(cable2);
+            }
+        }
+        
+        // Create Flow Particles (Data through TB5)
+        function createFlowParticles() {
+            const count = 200;
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+            
+            for (let i = 0; i < count; i++) {
+                // Distribute along the stack
+                positions[i * 3] = (Math.random() - 0.5) * 0.3;
+                positions[i * 3 + 1] = Math.random() * 1.8;
+                positions[i * 3 + 2] = -0.24 + (Math.random() - 0.5) * 0.1;
+                
+                // Red/orange color for TB5
+                colors[i * 3] = 1.0;
+                colors[i * 3 + 1] = 0.2 + Math.random() * 0.3;
+                colors[i * 3 + 2] = 0.1 + Math.random() * 0.2;
+            }
+            
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const mat = new THREE.PointsMaterial({
+                size: 0.02,
+                transparent: true,
+                opacity: 0.8,
+                vertexColors: true,
+                blending: THREE.AdditiveBlending
+            });
+            
+            flowParticles = new THREE.Points(geo, mat);
+            scene.add(flowParticles);
+        }
+        
+        // Create Ambient
+        function createAmbient() {
+            // Floor
+            const floorGeo = new THREE.PlaneGeometry(6, 6);
+            const floorMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.95 });
+            const floor = new THREE.Mesh(floorGeo, floorMat);
+            floor.rotation.x = -Math.PI / 2;
+            floor.position.y = -0.01;
+            floor.receiveShadow = true;
+            scene.add(floor);
+            
+            // Grid
+            const gridHelper = new THREE.GridHelper(6, 12, 0x222222, 0x111111);
+            gridHelper.position.y = 0.001;
+            scene.add(gridHelper);
+            
+            // Ambient particles
+            const count = 100;
+            const positions = new Float32Array(count * 3);
+            
+            for (let i = 0; i < count; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 8;
+                positions[i * 3 + 1] = Math.random() * 4;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+            }
+            
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const mat = new THREE.PointsMaterial({
+                color: 0xff3b30,
+                size: 0.012,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+            
+            ambientParticles = new THREE.Points(geo, mat);
+            scene.add(ambientParticles);
+        }
+        
+        // Create Stand/Base
+        function createStand() {
+            // Stand plate at bottom
+            const standGeo = new THREE.CylinderGeometry(0.35, 0.40, 0.03, 32);
+            const standMat = new THREE.MeshStandardMaterial({
+                color: 0x1a1a1a,
+                metalness: 0.8,
+                roughness: 0.3
+            });
+            const stand = new THREE.Mesh(standGeo, standMat);
+            stand.position.y = 0.015;
+            stand.receiveShadow = true;
+            scene.add(stand);
+            
+            // Ring light at base
+            const ringGeo = new THREE.TorusGeometry(0.38, 0.008, 8, 64);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0xff3b30 });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = Math.PI / 2;
+            ring.position.y = 0.032;
+            scene.add(ring);
+        }
+        
+        // Animation
+        const clock = new THREE.Clock();
+        let statsTimer = 0;
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const time = clock.getElapsedTime();
+            const delta = clock.getDelta();
+            
+            // Flow particles - move upward through stack
+            if (flowParticles && state.showData) {
+                const pos = flowParticles.geometry.attributes.position.array;
+                
+                for (let i = 0; i < pos.length / 3; i++) {
+                    pos[i * 3 + 1] += 0.015 + (i % 5) * 0.003;
+                    
+                    // Add slight horizontal movement
+                    pos[i * 3] += Math.sin(time * 3 + i) * 0.001;
+                    
+                    // Reset at top
+                    if (pos[i * 3 + 1] > 1.85) {
+                        pos[i * 3 + 1] = 0.05;
+                        pos[i * 3] = (Math.random() - 0.5) * 0.3;
+                        pos[i * 3 + 2] = -0.24 + (Math.random() - 0.5) * 0.1;
+                    }
+                }
+                flowParticles.geometry.attributes.position.needsUpdate = true;
+            }
+            
+            // Ambient particles
+            if (ambientParticles) {
+                ambientParticles.rotation.y = time * 0.02;
+            }
+            
+            // Rim light pulse
+            rimLight.intensity = 0.8 + Math.sin(time * 2) * 0.3;
+            
+            // Stats update
+            statsTimer += delta;
+            if (statsTimer > 0.5) {
+                statsTimer = 0;
+                const compute = 75 + Math.random() * 15;
+                const neural = 88 + Math.random() * 8;
+                const mem = 60 + Math.random() * 20;
+                
+                document.getElementById('compute-val').textContent = compute.toFixed(0) + '%';
+                document.getElementById('compute-bar').style.width = compute + '%';
+                document.getElementById('neural-val').textContent = neural.toFixed(0) + '%';
+                document.getElementById('neural-bar').style.width = neural + '%';
+                document.getElementById('mem-val').textContent = mem.toFixed(0) + '%';
+                document.getElementById('mem-bar').style.width = mem + '%';
+                
+                const temp = 38 + Math.random() * 6;
+                document.getElementById('temp').innerHTML = temp.toFixed(0) + '<span style="font-size:0.7em">°C</span>';
+            }
+            
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        
+        // Controls
+        function setupControls() {
+            document.getElementById('btn-rotate').addEventListener('click', function() {
+                state.autoRotate = !state.autoRotate;
+                controls.autoRotate = state.autoRotate;
+                this.classList.toggle('active', state.autoRotate);
+            });
+            
+            document.getElementById('btn-top').addEventListener('click', () => {
+                controls.autoRotate = false;
+                document.getElementById('btn-rotate').classList.remove('active');
+                animateCamera(0, 4, 2, 0, 0.9, 0);
+            });
+            
+            document.getElementById('btn-front').addEventListener('click', () => {
+                controls.autoRotate = false;
+                document.getElementById('btn-rotate').classList.remove('active');
+                animateCamera(0, 0.9, 3, 0, 0.9, 0);
+            });
+            
+            document.getElementById('btn-data').addEventListener('click', function() {
+                state.showData = !state.showData;
+                this.classList.toggle('active', state.showData);
+                if (flowParticles) flowParticles.visible = state.showData;
+                tb5Cables.forEach(cable => cable.visible = state.showData);
+            });
+            
+            document.getElementById('btn-reset').addEventListener('click', function() {
+                state.autoRotate = true;
+                state.showData = true;
+                controls.autoRotate = true;
+                if (flowParticles) flowParticles.visible = true;
+                tb5Cables.forEach(cable => cable.visible = true);
+                document.getElementById('btn-rotate').classList.add('active');
+                document.getElementById('btn-data').classList.add('active');
+                animateCamera(3, 2, 5, 0, 0.8, 0);
+            });
+        }
+        
+        function animateCamera(x, y, z, tx, ty, tz) {
+            const start = { x: camera.position.x, y: camera.position.y, z: camera.position.z, tx: controls.target.x, ty: controls.target.y, tz: controls.target.z };
+            const duration = 1000;
+            const startTime = Date.now();
+            
+            function update() {
+                const t = Math.min((Date.now() - startTime) / duration, 1);
+                const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                camera.position.set(start.x + (x - start.x) * ease, start.y + (y - start.y) * ease, start.z + (z - start.z) * ease);
+                controls.target.set(start.tx + (tx - start.tx) * ease, start.ty + (ty - start.ty) * ease, start.tz + (tz - start.tz) * ease);
+                if (t < 1) requestAnimationFrame(update);
+            }
+            update();
+        }
+        
+        // Init
+        function onResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        function init() {
+            createStand();
+            createStack();
+            createFlowParticles();
+            createAmbient();
+            setupControls();
+            window.addEventListener('resize', onResize);
+            setTimeout(() => document.getElementById('loading').classList.add('hidden'), 600);
+            animate();
+        }
+        
+        init();
+    </script>
 </body>
 </html>
